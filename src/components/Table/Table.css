@@ -1,0 +1,16 @@
+.table__title {
+  padding: 25px;
+  -webkit-text-stroke: 1px white;
+  text-shadow: 6px 6px 10px black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 35px;
+  margin: 0;
+  color: yellowgreen;
+  width: 100%;
+  background-color: rgb(222, 230, 201);
+}
+
+.table__table {
+  padding: 0 25px;
+}
