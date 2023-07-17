@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './slice';
 
-const store = configureStore({
-  reducer
+import tableSlice from './slice';
+
+const store = configureStore({ 
+  reducer: tableSlice
 });
 
 // экспортируем тип для данных их стейта

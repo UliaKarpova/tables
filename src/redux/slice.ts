@@ -1,24 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// импортируем исходные данные
-import { users } from "../bd";
-import { products } from "../bd";
-
-// импортируем функцию поиска
-import { dataReducer, resetReducer } from './reducers';
+import { findDataReducer, addDataReducer } from './reducers';
 
 export const appSlice: any = createSlice({
   name: 'appSlice',
-  initialState: {
-    users,
-    products
-  },
+  initialState: [],
   reducers: {
-    dataFinder: dataReducer,
-    resetData: resetReducer
+    dataFinder: findDataReducer,
+    addData: addDataReducer
   }
 })
 
-export const { dataFinder, resetData } = appSlice.actions;
+export const { dataFinder, addData } = appSlice.actions;
 
 export default appSlice.reducer;
