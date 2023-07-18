@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { findDataReducer, addDataReducer } from './reducers';
+import { IDataType } from '../types';
+
+const initialState: IDataType[] | [] = [];
 
 export const appSlice: any = createSlice({
   name: 'appSlice',
-  initialState: [],
+  initialState,
   reducers: {
     dataFinder: findDataReducer,
     addData: addDataReducer

@@ -1,42 +1,37 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 import { addData, dataFinder } from '../../redux/slice'
-import type { RootState } from '../../redux/store'
 import Finder from '../Finder/Finder';
-import { DataType, Cell } from '../../types';
+import { IDataType, ICell, IIdAndData } from '../../types';
 
 import './Table.css';
 
-function MyTable(props:
-  {
-    id: string,
-    data: DataType[]
-  }) {
+const MyTable: React.FC<IIdAndData> = ({ id, data }) => {
 
   // создаём стейт для хранения поискового запроса
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // сохраняем данные в стор
   useEffect(() => {
-    if (props.data) {
-      dispatch(addData({ data: props.data, id: props.id }));
+    if (data) {
+      dispatch(addData({ data, id }));
     }
   }, [])
 
   // получаем данные из стора
-  const tableStore = useSelector((state: RootState) => state[props.id]);
+  const tableStore = useAppSelector(state => state[id]);
 
   // ищём данные в таблице при сабмите инпута поиска
   const findData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchQuery) {
       const timeout = setTimeout(() => {
-        dispatch(dataFinder({ id: props.id, searchQuery: searchQuery }))
+        dispatch(dataFinder({ id, searchQuery }))
         clearTimeout(timeout);
       }, 1000)
     } else {
@@ -47,15 +42,15 @@ function MyTable(props:
   // сбрасываем данные до изначальных после поиска
   const resetTable = () => {
     setSearchQuery('');
-    dispatch(addData({ id: props.id, data: props.data }));
+    dispatch(addData({ id, data }));
   }
 
   // получаем массив ключей, которые станут заголовком таблицы
-  const dataKeys: string[] = props.data.length !== 0 ? Object.keys(props.data[0]) : [];
+  const dataKeys: string[] = data.length !== 0 ? Object.keys(data[0]) : [];
 
   // создаём колонки для antd
-  const columns: ColumnsType<DataType> = dataKeys ? dataKeys.map((key) => {
-    const cell: Cell = {
+  const columns: ColumnsType<IDataType> = dataKeys ? dataKeys.map((key) => {
+    const cell: ICell = {
       title: key[0].toUpperCase() + key.slice(1),
       dataIndex: key,
       key: key
@@ -79,7 +74,7 @@ function MyTable(props:
         className='table__table'
         rowKey={'id'}
         columns={columns}
-        dataSource={tableStore ? tableStore : props.data} />
+        dataSource={tableStore ? tableStore : data} />
     </div>
 
   )

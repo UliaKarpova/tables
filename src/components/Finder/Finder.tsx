@@ -1,22 +1,23 @@
 import './Finder.css';
+import { IFinderProps } from '../../types';
 
-function Finder(props: {
-  reset: () => void,
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
-  searchQuery: string,
-  setSearchQuery: (str: string) => void
-}) {
+const Finder: React.FC<IFinderProps> = ({
+  reset,
+  onSubmit,
+  searchQuery,
+  setSearchQuery }) => {
+
   return (
     <form
       className='form'
-      onSubmit={(e) => props.onSubmit(e)}>
+      onSubmit={(e) => onSubmit(e)}>
 
       <input
         className='form__input'
         type='text'
         placeholder='Enter value...'
-        value={props.searchQuery}
-        onChange={e => props.setSearchQuery(e.target.value)} />
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)} />
 
       <button
         className='form__btn'
@@ -24,7 +25,7 @@ function Finder(props: {
 
       <button
         className='form__btn'
-        type="button" onClick={props.reset}>Reset</button>
+        type="button" onClick={reset}>Reset</button>
 
     </form>
   )

@@ -1,8 +1,8 @@
-import { DataType } from "../types";
+import { IDataType } from "../types";
 
-export default function findData(data: DataType[], str: string) {
+export default function findData(data: IDataType[], str: string) {
 
-  const newState: DataType[] | [] = data.filter((item: DataType) => {
+  const newState: IDataType[] | [] = data.filter((item: IDataType) => {
     let myItem;
     for (let key in item) {
       // приводим значение свойства к строке

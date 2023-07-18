@@ -1,10 +1,11 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import findData from './findData';
-import { DataType } from '../types';
+import { IDataType, IPayloadForSeaching, IIdAndData } from '../types';
 import { RootState } from './store';
 
 // ищем данные в по переданной строке
-export const findDataReducer = (state: RootState, action: any) => {
-  const newData: DataType[] = findData(state[action.payload.id], action.payload.searchQuery);
+export const findDataReducer = (state: RootState, action: PayloadAction<IPayloadForSeaching>) => {
+  const newData: IDataType[] = findData(state[action.payload.id], action.payload.searchQuery);
   return {
     ...state,
     [action.payload.id]: newData,
@@ -12,7 +13,7 @@ export const findDataReducer = (state: RootState, action: any) => {
 }
 
 // сохраняем в стор данные из исходного массива
-export const addDataReducer = (state: RootState, action: any) => {
+export const addDataReducer = (state: RootState, action: PayloadAction<IIdAndData>) => {
   const { data, id } = action.payload;
   return {
     ...state,
