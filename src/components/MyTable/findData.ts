@@ -1,4 +1,4 @@
-import { IDataType } from "../components/MyTable/types";
+import { IDataType } from "./types";
 
 export default function findData(data: IDataType[], str: string) {
 

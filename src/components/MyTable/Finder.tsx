@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Button, Input, Space } from 'antd';
+
 import { TableContext } from './TableContext';
 import { useAppDispatch } from '../../redux/hook';
-import { dataFinder, addData } from './slice';
+import { dataFinder, resetData } from './slice';
+
 const { Search } = Input;
 
 export const Finder: React.FC = () => {
@@ -11,8 +13,7 @@ export const Finder: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const tableContext = useContext(TableContext);
-  const { id, data } = tableContext;
+  const { id } = useContext(TableContext);
   
   // поиск данных
   const findData = () => {
@@ -28,7 +29,7 @@ export const Finder: React.FC = () => {
   // сбрасываем данные до изначальных после поиска
   const resetTable = () => {
     setSearchQuery('');
-    dispatch(addData({ id, data }));
+    dispatch(resetData({ id }));
   }
 
   // обновляем поисковкую строку, обнуляем таймер поиска, если измениласть строка

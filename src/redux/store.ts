@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { reducer } from '../components/MyTable/index';
+import { tableReducer } from '../components/MyTable/index';
 
 const store = configureStore({ 
-  reducer
+  reducer: tableReducer
 });
 
 // экспортируем тип для данных их стейта

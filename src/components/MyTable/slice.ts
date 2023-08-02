@@ -1,20 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { findDataReducer, addDataReducer } from '../../redux/reducers';
+import {
+  findDataReducer,
+  addOriginalDataReducer,
+  resetDataReducer
+} from './reducers';
 import { IDataType } from './types';
 
 const initialState: {
-  [key: string]: IDataType[]
-} = {};
+  filtredData: {
+    [key: string]: IDataType[]
+  },
+  originalData: {
+    [key: string]: IDataType[]
+  },
+} = { filtredData: {}, originalData: {} };
 
 export const appSlice: any = createSlice({
   name: 'appSlice',
   initialState,
   reducers: {
     dataFinder: findDataReducer,
-    addData: addDataReducer
+    addOriginalData: addOriginalDataReducer,
+    resetData: resetDataReducer
   }
 })
 
-export const { dataFinder, addData } = appSlice.actions;
+export const { dataFinder,
+  addOriginalData,
+  resetData } = appSlice.actions;
 
-export const reducer = appSlice.reducer;
+export const tableReducer = appSlice.reducer;

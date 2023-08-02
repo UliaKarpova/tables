@@ -1,9 +1,7 @@
 import { createContext } from "react";
-import { IDataType } from './types';
 
 type ContextContent = {
-    id: string | null,
-    data: IDataType[] | []
+    id: string | null
 }
 
-export const TableContext = createContext<ContextContent>({id: null, data: []});
+export const TableContext = createContext<ContextContent>({ id: null });
